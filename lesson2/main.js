@@ -1,3 +1,7 @@
+// Running threejs with a Bundler
+
+import * as THREE from 'three'
+
 const sizes = {
     width: 800,
     height: 600

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+// Red Cube
 
 const sizes = {
     width: 800,
