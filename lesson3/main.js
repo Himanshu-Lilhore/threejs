@@ -1,3 +1,5 @@
+// Object transformation
+
 import * as THREE from "three";
 
 const sizes = {
