@@ -21,20 +21,20 @@ const particleTexture = textureLoader.load("/textures/particles/3.png");
 
 
 const parameters = {
-    count: 6000,
-    branches: 10,
-    radius: 3,
-    curve: 1,
-    order: 3,
-    flatness: 3,
-    flatEnds: 0.3,
-    innerColor: "#ff0000",
-    outerColor: "#0000ff",
+    "count": 29700,
+    "branches": 5,
+    "radius": 3,
+    "curve": 0.74,
+    "order": 3.8,
+    "flatness": 1.7,
+    "flatEnds": 0.22,
+    "innerColor": "#ff8800",
+    "outerColor": "#0000ff"
 };
 
 const savedSettings = JSON.parse(localStorage.getItem(localStorageVariable));
 if (savedSettings) {
-    console.log("Got GUI parameters from localStorage : ", savedSettings)
+    console.log(`Parameters from localStorage (${localStorageVariable}) : `, savedSettings)
     Object.assign(parameters, savedSettings);
 }
 
@@ -118,6 +118,19 @@ gui.addColor(parameters, "outerColor").onFinishChange(generateGalaxy);
 gui.onFinishChange(() => {
     localStorage.setItem(localStorageVariable, JSON.stringify(parameters));
 });
+gui.onFinishChange(() => {
+    localStorage.setItem(localStorageVariable, JSON.stringify(parameters));
+});
+parameters.copyToClipboard = () => {
+    const copyParams = { ...parameters };
+    delete copyParams.copyToClipboard;
+
+    const code = `const parameters = ${JSON.stringify(copyParams, null, 4)};`;
+    navigator.clipboard.writeText(code).then(() => {
+        console.log("Parameters copied to clipboard");
+    });
+};
+gui.add(parameters, "copyToClipboard").name("📋 Copy Config");
 
 
 
